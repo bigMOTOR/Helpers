@@ -19,8 +19,12 @@ func mapArray<T>(transform)
 func shareReplay(bufferSize)    // Adapted from https://www.onswiftwings.com/posts/share-replay-operator/ 
 ```
 
+## In-App (HelpersIAP):
+- IAPProduct model;
+
 ## Library (HelpersLibrary):
 - protocol AppDetails - provides app version and build number;
+- protocol AppStoreReview - provides dialog for Rate Us;
 - protocol DeviceDetails - provides device model,  system version and  device locale;
 - protocol ErrorLocalizedDescription;
 - Formatter - easy way to format numbers;
@@ -66,7 +70,8 @@ func distance(to index: Index) -> Int
     
 </details>
 
-## SwiftUI Modifiers (HelpersSwiftUI):
+## SwiftUI (HelpersSwiftUI):
+Modifiers:
 ```swift
 func navigationBarColors(background: Color, tint: Color)
 func onFrameChange(enabled isEnabled: Bool = true, frameHandler: @escaping (CGRect)->())
@@ -77,6 +82,13 @@ func rotateHandling(anchor: UnitPoint = .center)
 func rotated(_ angle: Angle)
 func blink(on state: Binding<Bool>, duration: Double = 0.1)
 ```
+
+<details>
+<summary>Views</summary>
+    
+- MailView.
+    
+</details>
 
 ## [The Composable Architecture (TCA)](https://github.com/pointfreeco/swift-composable-architecture) Helpers (HelpersTCA):
 - Lifecycle Reducer ([problem statement](https://forums.swift.org/t/ifletstore-and-effect-cancellation-on-view-disappear/38272/7));
