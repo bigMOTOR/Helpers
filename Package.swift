@@ -71,7 +71,9 @@ let package = Package(
             dependencies: []),
         .target(
             name: "HelpersSwiftUI",
-            dependencies: []),
+            dependencies: [
+              "HelpersLibrary"
+            ]),
         .target(
             name: "HelpersIAP",
             dependencies: [
