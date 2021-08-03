@@ -74,7 +74,9 @@ let package = Package(
             dependencies: []),
         .target(
             name: "HelpersIAP",
-            dependencies: []),
+            dependencies: [
+              "Purchases",
+            ]),
         .target(
             name: "RevenuecatComposable",
             dependencies: [

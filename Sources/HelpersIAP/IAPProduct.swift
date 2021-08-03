@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct IAPProduct: Equatable {
+public struct IAPProduct: Equatable {
   
-  struct Period: Equatable {
-    enum Unit: String {
+  public struct Period: Equatable {
+    public enum Unit: String {
       case day
       case week
       case month
       case year
     }
     
-    let numberOfUnits: Int
-    let unit: Unit
+    public let numberOfUnits: Int
+    public let unit: Unit
     
-    init(numberOfUnits: Int, unit: IAPProduct.Period.Unit) {
+    public init(numberOfUnits: Int, unit: IAPProduct.Period.Unit) {
       switch (numberOfUnits, unit) {
       case (7, .day):
         self.numberOfUnits = 1
@@ -33,17 +33,17 @@ struct IAPProduct: Equatable {
     
   }
   
-  let productIdentifier: String
-  let localizedDescription: String
-  let localizedPriceString: String
-  let price: NSDecimalNumber
-  let priceLocale: Locale
-  let subscriptionPeriod: Period?
-  let introductoryPeriod: Period?
+  public let productIdentifier: String
+  public let localizedDescription: String
+  public let localizedPriceString: String
+  public let price: NSDecimalNumber
+  public let priceLocale: Locale
+  public let subscriptionPeriod: Period?
+  public let introductoryPeriod: Period?
 }
 
 #if DEBUG
-extension IAPProduct {
+public extension IAPProduct {
   static func mock(unit: IAPProduct.Period.Unit) -> IAPProduct {
     return IAPProduct(productIdentifier: "productIdentifier",
                       localizedDescription: "localizedDescription",
