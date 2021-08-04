@@ -13,18 +13,28 @@ public protocol AppStoreReview {
 }
 
 public extension AppStoreReview {
-  func incrementCount() {
+  func incrementAppStoreReviewPointsCount() {
     UserDefaults.standard.storedCount = UserDefaults.standard.storedCount + 1
   }
   
   /// This will not be shown everytime. Apple has some internal logic on how to show this.
-  func tryToAsk() {
+  func tryRequestReviewInCurrentScene() {
     switch shouldAsk(for: UserDefaults.standard.storedCount) {
     case true:
-      SKStoreReviewController.requestReview()
+      if #available(iOS 14.0, *) {
+        guard let firstScene = UIApplication.shared.windows.first?.windowScene else { return }
+        SKStoreReviewController.requestReview(in: firstScene)
+      } else {
+        SKStoreReviewController.requestReview()
+      }
     case false:
       break;
     }
+  }
+  
+  func requestReviewInCurrentSceneOrIncrementCount() {
+    incrementAppStoreReviewPointsCount()
+    tryRequestReviewInCurrentScene()
   }
 }
 
