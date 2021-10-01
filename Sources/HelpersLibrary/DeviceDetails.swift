@@ -26,7 +26,7 @@ public extension DeviceDetails {
   }
   
   var deviceLocale: String {
-    return "\(Locale.current.regionCode ?? .naString)-\(Locale.current.languageCode ?? .naString)"
+    return Locale.preferredLanguages.first ?? .naString
   }
 }
 
