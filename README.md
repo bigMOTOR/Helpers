@@ -38,6 +38,7 @@ func filterTrue()
 func invert()
 func asDelayedActivity(_ delay: DispatchTimeInterval = .milliseconds(200))
 func mapArray<T>(transform)
+func fromAsync(_ block: { element in ... }) -> Single<Element>
 ```
 
 ## Swift Stdlib Extensions (HelpersSwift):
