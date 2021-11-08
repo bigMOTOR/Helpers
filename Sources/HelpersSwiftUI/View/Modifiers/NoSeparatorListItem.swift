@@ -9,10 +9,14 @@ import SwiftUI
 
 struct NoSeparatorListItem: ViewModifier {
   func body(content: Content) -> some View {
-    content
-      .padding(.horizontal)
-      .padding(.vertical, 5)
-      .listRowInsets(EdgeInsets())
-      .background(Color(UIColor.systemBackground))
+    if #available(iOS 15, *) {
+      content.listRowSeparator(.hidden)
+    } else {
+      content
+        .padding(.horizontal)
+        .padding(.vertical, 5)
+        .listRowInsets(EdgeInsets())
+        .background(Color(UIColor.systemBackground))
+    }
   }
 }
