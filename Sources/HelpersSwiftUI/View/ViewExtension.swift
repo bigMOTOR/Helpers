@@ -46,4 +46,15 @@ public extension View {
     return self.modifier(BlinkingModifier(state: state, duration: duration))
   }
   
+  /// Applies the given transform if the given condition evaluates to `true`.
+  /// - cool usage with iOSVersions:
+  /// -- .if(.iOS13) { ... }
+  @ViewBuilder func `if`<Content: View>(_ condition: @autoclosure () -> Bool, transform: (Self) -> Content) -> some View {
+    if condition() {
+      transform(self)
+    } else {
+      self
+    }
+  }
+  
 }
