@@ -7,7 +7,7 @@
 
 import SwiftUI
 import MessageUI
-import HelpersLibrary
+import Helpers
 
 public struct MailView: UIViewControllerRepresentable, AppDetails, DeviceDetails {
   

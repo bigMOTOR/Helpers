@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import HelpersSwift
 
 public protocol AppDetails {}
 

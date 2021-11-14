@@ -6,42 +6,7 @@
 </p>
 Tiny convenient code pieces that I'm tired of copy-paste across all my projects. 
 
-## Combine (HelpersCombine)
-- PublisherExtension:
-```swift
-func mapToVoid()
-func mapToOptional()
-func flatMapLatest()
-func filterFalse() 
-func filterTrue() 
-func invert() 
-func mapArray<T>(transform)
-func shareReplay(bufferSize)    // Adapted from https://www.onswiftwings.com/posts/share-replay-operator/ 
-```
-
-## In-App (HelpersIAP):
-- IAPProduct model;
-
-## Library (HelpersLibrary):
-- protocol AppDetails - provides app version and build number;
-- protocol AppStoreReview - provides dialog for Rate Us;
-- protocol DeviceDetails - provides device model,  system version and  device locale;
-- protocol ErrorLocalizedDescription;
-- Formatter - easy way to format numbers;
-- JsonObject - pretty typealias for [String: Any].
-
-## [RxSwift](https://github.com/ReactiveX/RxSwift) Extensions (HelpersRxSwift):
-```swift
-func mapToVoid()
-func filterFalse()
-func filterTrue()
-func invert()
-func asDelayedActivity(_ delay: DispatchTimeInterval = .milliseconds(200))
-func mapArray<T>(transform)
-func fromAsync(_ block: { element in ... }) -> Single<Element>
-```
-
-## Swift Stdlib Extensions (HelpersSwift):
+## Swift Stdlib Extensions and Common things I need sometimes (Helpers):
 <details>
 <summary>Array;</summary>
     
@@ -70,6 +35,45 @@ func distance(to index: Index) -> Int
 - provides getter and setter for Codable values.
     
 </details>
+
+<details>
+<summary>Something I need sometimes;</summary>
+
+- protocol AppDetails - provides app version and build number;
+- protocol AppStoreReview - provides dialog for Rate Us;
+- protocol DeviceDetails - provides device model, system version and  device locale;
+- protocol ErrorLocalizedDescription;
+- Formatter - easy way to format numbers;
+- JsonObject - pretty typealias for [String: Any].
+
+</details>
+
+## Combine (HelpersCombine)
+- PublisherExtension:
+```swift
+func mapToVoid()
+func mapToOptional()
+func flatMapLatest()
+func filterFalse() 
+func filterTrue() 
+func invert() 
+func mapArray<T>(transform)
+func shareReplay(bufferSize)    // Adapted from https://www.onswiftwings.com/posts/share-replay-operator/ 
+```
+
+## In-App (HelpersIAP):
+- IAPProduct model;
+
+## [RxSwift](https://github.com/ReactiveX/RxSwift) Extensions (HelpersRxSwift):
+```swift
+func mapToVoid()
+func filterFalse()
+func filterTrue()
+func invert()
+func asDelayedActivity(_ delay: DispatchTimeInterval = .milliseconds(200))
+func mapArray<T>(transform)
+func fromAsync(_ block: { element in ... }) -> Single<Element>
+```
 
 ## SwiftUI (HelpersSwiftUI):
 Modifiers:

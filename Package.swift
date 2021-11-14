@@ -14,17 +14,14 @@ let package = Package(
             name: "HelpersCombine",
             targets: ["HelpersCombine"]),
         .library(
-            name: "HelpersLibrary",
-            targets: ["HelpersLibrary"]),
-        .library(
             name: "HelpersRxSwift",
             targets: ["HelpersRxSwift"]),
         .library(
             name: "HelpersTCA",
             targets: ["HelpersTCA"]),
         .library(
-            name: "HelpersSwift",
-            targets: ["HelpersSwift"]),
+            name: "Helpers",
+            targets: ["Helpers"]),
         .library(
             name: "HelpersSwiftUI",
             targets: ["HelpersSwiftUI"]),
@@ -51,11 +48,6 @@ let package = Package(
             name: "HelpersCombine",
             dependencies: []),
         .target(
-            name: "HelpersLibrary",
-            dependencies: [
-                "HelpersSwift"
-            ]),
-        .target(
             name: "HelpersRxSwift",
             dependencies: [
                 "RxSwift",
@@ -67,12 +59,12 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
         .target(
-            name: "HelpersSwift",
+            name: "Helpers",
             dependencies: []),
         .target(
             name: "HelpersSwiftUI",
             dependencies: [
-              "HelpersLibrary"
+              "Helpers"
             ]),
         .target(
             name: "HelpersIAP",
