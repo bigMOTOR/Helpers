@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: UIKit Colors
 public extension Color {
   static let systemBackground = Color(UIColor.systemBackground)
   static let secondarySystemBackground = Color(UIColor.secondarySystemBackground)
@@ -22,3 +23,15 @@ public extension Color {
   static let systemGray2 = Color(UIColor.systemGray2)
 }
 
+public extension Color {
+  static func dynamicColor(light: UIColor, dark: UIColor) -> UIColor {
+    return UIColor { traitCollection in
+      switch traitCollection.userInterfaceStyle {
+      case .dark:
+        return dark
+      default:
+        return light
+      }
+    }
+  }
+}
