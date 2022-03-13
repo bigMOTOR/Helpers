@@ -39,7 +39,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.0.0" )),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: "0.20.0" )),
-        .package(name: "Purchases", url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "3.0.0" )),
+        .package(name: "RevenueCat", url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "4.0.0" )),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -69,19 +69,19 @@ let package = Package(
         .target(
             name: "HelpersIAP",
             dependencies: [
-              "Purchases",
+              "RevenueCat",
             ]),
         .target(
             name: "RevenuecatComposable",
             dependencies: [
-                "Purchases",
+                "RevenueCat",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 "HelpersIAP",
             ]),
         .target(
             name: "RevenuecatRx",
             dependencies: [
-                "Purchases",
+                "RevenueCat",
                 "RxSwift",
                 .product(name: "RxCocoa", package: "RxSwift"),
                 "HelpersIAP",

@@ -6,28 +6,27 @@
 //
 
 import Foundation
-import Purchases
+import RevenueCat
 
 extension IAPProduct {
-  public init(_ package: Purchases.Package) {
-    self.productIdentifier = package.product.productIdentifier
-    self.localizedDescription = package.product.localizedDescription
+  public init(_ package: RevenueCat.Package) {
+    self.productIdentifier = package.storeProduct.productIdentifier
+    self.localizedDescription = package.storeProduct.localizedDescription
     self.localizedPriceString = package.localizedPriceString
-    self.price = package.product.price
-    self.priceLocale = package.product.priceLocale
-    self.introductoryPeriod = package.product.introductoryPrice.map { IAPProduct.Period(period: $0.subscriptionPeriod) }
-    self.subscriptionPeriod = package.product.subscriptionPeriod.map { IAPProduct.Period(period: $0) }
+    self.price = package.storeProduct.price
+    self.introductoryPeriod = package.storeProduct.introductoryDiscount.map(\.subscriptionPeriod).map(IAPProduct.Period.init)
+    self.subscriptionPeriod = package.storeProduct.subscriptionPeriod.map(IAPProduct.Period.init)
   }
 }
 
 private extension IAPProduct.Period {
-  init(period: SKProductSubscriptionPeriod) {
-    self = .init(numberOfUnits: period.numberOfUnits, unit: IAPProduct.Period.Unit(unit: period.unit))
+  init(period: SubscriptionPeriod) {
+    self = .init(numberOfUnits: period.value, unit: .init(unit: period.unit))
   }
 }
 
 private extension IAPProduct.Period.Unit {
-  init(unit: SKProduct.PeriodUnit) {
+  init(unit: SubscriptionPeriod.Unit) {
     switch unit {
     case .day:
       self = .day

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Purchases
+import RevenueCat
 import RxSwift
 import RxCocoa
 
@@ -16,9 +16,9 @@ public extension Reactive where Base: Purchases {
     return PurchasesDelegateProxy.proxy(for: base)
   }
 
-  var didReceiveUpdatedPurchaserInfo: Observable<Purchases.PurchaserInfo> {
+  var didReceiveUpdatedCustomerInfo: Observable<RevenueCat.CustomerInfo> {
     return PurchasesDelegateProxy.proxy(for: base)
-      .purchaserInfoSubject
+      .customerInfoSubject
       .distinctUntilChanged()
   }
   
@@ -26,7 +26,7 @@ public extension Reactive where Base: Purchases {
 
 final class PurchasesDelegateProxy: DelegateProxy<Purchases, PurchasesDelegate>, DelegateProxyType, PurchasesDelegate {
   
-  let purchaserInfoSubject = PublishSubject<Purchases.PurchaserInfo>()
+  let customerInfoSubject = PublishSubject<RevenueCat.CustomerInfo>()
 
   init(purchases: Purchases) {
     super.init(parentObject: purchases, delegateProxy: PurchasesDelegateProxy.self)
@@ -36,8 +36,8 @@ final class PurchasesDelegateProxy: DelegateProxy<Purchases, PurchasesDelegate>,
     self.register { PurchasesDelegateProxy(purchases: $0) }
   }
   
-  func purchases(_ purchases: Purchases, didReceiveUpdated purchaserInfo: Purchases.PurchaserInfo) {
-    purchaserInfoSubject.onNext(purchaserInfo)
+  func purchases(_ purchases: Purchases, receivedUpdated customerInfo: RevenueCat.CustomerInfo) {
+    customerInfoSubject.onNext(customerInfo)
   }
 
 }

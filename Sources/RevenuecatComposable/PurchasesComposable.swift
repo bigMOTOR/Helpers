@@ -8,12 +8,12 @@
 import Foundation
 import Combine
 import ComposableArchitecture
-import Purchases
+import RevenueCat
 
 public extension Purchases {
-  static var purchaserInfo: Effect<Purchases.PurchaserInfo, Error> {
-    let initialPurchaserInfo = Effect.future { (result: @escaping (Result<Purchases.PurchaserInfo, Error>)->Void) in
-      Purchases.shared.purchaserInfo { info, error in
+  static var customerInfo: Effect<RevenueCat.CustomerInfo, Error> {
+    let initialPurchaserInfo = Effect.future { (result: @escaping (Result<RevenueCat.CustomerInfo, Error>)->Void) in
+      Purchases.shared.getCustomerInfo { info, error in
         switch info {
         case .some(let purchaserInfo):
           result(.success(purchaserInfo))
@@ -24,13 +24,13 @@ public extension Purchases {
     }
     
     let purchasesDelegate = PurchasesDelegateProxy()
-    let purchaserInfoUpdates = purchasesDelegate._didReceiveUpdatedSubject.eraseToAnyPublisher()
+    let customerInfoUpdates = purchasesDelegate._didReceiveUpdatedSubject.eraseToAnyPublisher()
       .setFailureType(to: Error.self)
       .eraseToEffect()
     
     return .merge(
       initialPurchaserInfo,
-      purchaserInfoUpdates
+      customerInfoUpdates
     )
     .removeDuplicates()
     .eraseToEffect()
@@ -41,9 +41,9 @@ public extension Purchases {
 private struct PurchaserInfoId: Hashable {}
 
 final class PurchasesDelegateProxy: NSObject, PurchasesDelegate {
-  let _didReceiveUpdatedSubject = PassthroughSubject<Purchases.PurchaserInfo, Never>()
+  let _didReceiveUpdatedSubject = PassthroughSubject<RevenueCat.CustomerInfo, Never>()
   
-  func purchases(_ purchases: Purchases, didReceiveUpdated purchaserInfo: Purchases.PurchaserInfo) {
-    _didReceiveUpdatedSubject.send(purchaserInfo)
+  func purchases(_ purchases: Purchases, receivedUpdated customerInfo: RevenueCat.CustomerInfo) {
+    _didReceiveUpdatedSubject.send(customerInfo)
   }
 }
