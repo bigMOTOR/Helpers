@@ -56,17 +56,26 @@ public extension Formatter {
     }
   }
   
-  static func currency(in locale: Locale = Locale.current) -> Formatter {
+  static func currency(in locale: Locale = Locale.current, fallbackCurrencySymbol: String = .naString) -> Formatter {
+    return Formatter._currency(with: locale.currencySymbol ?? fallbackCurrencySymbol, in: locale)
+  }
+  
+  static func currency(with symbol: String, in locale: Locale = Locale.current) -> Formatter {
+    return Formatter._currency(with: symbol, in: locale)
+  }
+  
+  private static func _currency(with symbol: String, in locale: Locale) -> Formatter {
     return Formatter { formatter in
       formatter.numberStyle = .currency
       formatter.locale = locale
-      formatter.currencySymbol = locale.currencySymbol ?? "$"
+      formatter.currencySymbol = symbol
       formatter.minimumFractionDigits = 2
       formatter.maximumFractionDigits = 2
       formatter.negativePrefix = "-"
       return formatter
     }
   }
+
 }
 
 public protocol NSNumberConvertable {
