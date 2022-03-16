@@ -14,6 +14,7 @@ extension IAPProduct {
     self.localizedDescription = package.storeProduct.localizedDescription
     self.localizedPriceString = package.localizedPriceString
     self.price = package.storeProduct.price
+    self.currencyCode = package.storeProduct.currencyCode
     self.introductoryPeriod = package.storeProduct.introductoryDiscount.map(\.subscriptionPeriod).map(IAPProduct.Period.init)
     self.subscriptionPeriod = package.storeProduct.subscriptionPeriod.map(IAPProduct.Period.init)
   }

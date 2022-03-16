@@ -37,6 +37,7 @@ public struct IAPProduct: Equatable {
   public let localizedDescription: String
   public let localizedPriceString: String
   public let price: Decimal
+  public let currencyCode: String?
   public let subscriptionPeriod: Period?
   public let introductoryPeriod: Period?
 }
@@ -48,6 +49,7 @@ public extension IAPProduct {
                       localizedDescription: "localizedDescription",
                       localizedPriceString: "$29.99",
                       price: 29.99,
+                      currencyCode: "USD",
                       subscriptionPeriod: Period(numberOfUnits: 1, unit: unit),
                       introductoryPeriod: Period(numberOfUnits: 3, unit: .day))
   }
