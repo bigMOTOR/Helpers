@@ -15,11 +15,13 @@ public struct MailView: UIViewControllerRepresentable, AppDetails, DeviceDetails
   @Binding var result: Result<MFMailComposeResult, Error>?
   private let _recipient: String
   private let _subject: String
+  private let _userId: String?
   
-  public init(result: Binding<Result<MFMailComposeResult, Error>?>, recipient: String, subject: String) {
+  public init(result: Binding<Result<MFMailComposeResult, Error>?>, recipient: String, subject: String, userId: String? = nil) {
     self._result = result
     self._recipient = recipient
     self._subject = subject
+    self._userId = userId
   }
   
   public func makeCoordinator() -> Coordinator {
@@ -29,7 +31,8 @@ public struct MailView: UIViewControllerRepresentable, AppDetails, DeviceDetails
   public func makeUIViewController(context: UIViewControllerRepresentableContext<MailView>) -> MFMailComposeViewController {
     let mailCompose = MFMailComposeViewController()
     mailCompose.setToRecipients([_recipient])
-    mailCompose.setMessageBody("\n\nmodel: \(deviceModel) \nOS version: \(systemVersion) \nApp version: \(appVersion) \nCountry: \(deviceLocale)", isHTML: false)
+    let userIdInfo = _userId.map { "\nuId: \($0)" } ?? ""
+    mailCompose.setMessageBody("\n\nmodel: \(deviceModel) \nOS version: \(systemVersion) \nApp version: \(appVersion) \nCountry: \(deviceLocale)" + userIdInfo, isHTML: false)
     mailCompose.setSubject(_subject)
     mailCompose.mailComposeDelegate = context.coordinator
     return mailCompose
