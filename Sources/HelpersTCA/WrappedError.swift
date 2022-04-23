@@ -8,8 +8,12 @@
 import Foundation
 import Combine
 
-public struct WrappedError: Error {
+public struct WrappedError: Error, LocalizedError {
   let base: Error
+  
+  public var localizedDescription: String {
+    return base.localizedDescription
+  }
   
   public init(base: Error) {
     self.base = base
