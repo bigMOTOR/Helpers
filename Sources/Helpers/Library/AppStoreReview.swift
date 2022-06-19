@@ -8,6 +8,7 @@
 import Foundation
 import StoreKit
 
+#if os(iOS) || os(macOS)
 public protocol AppStoreReview {
   func shouldAsk(for count: Int) -> Bool
 }
@@ -27,6 +28,7 @@ public extension AppStoreReview {
     }
   }
 }
+#endif
 
 private extension UserDefaults {
   var storedCount: Int {

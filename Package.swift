@@ -7,9 +7,22 @@ let package = Package(
     name: "Helpers",
     platforms: [
         .iOS(.v13),
+        .watchOS(.v6),
+        .macOS(.v11),
+        .tvOS(.v13)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
+      
+        // MARK: Base
+        .library(
+            name: "Helpers",
+            targets: ["Helpers"]),
+        .library(
+            name: "HelpersDate",
+            targets: ["HelpersDate"]),
+        
+        // MARK: Specific
         .library(
             name: "HelpersCombine",
             targets: ["HelpersCombine"]),
@@ -19,9 +32,6 @@ let package = Package(
         .library(
             name: "HelpersTCA",
             targets: ["HelpersTCA"]),
-        .library(
-            name: "Helpers",
-            targets: ["Helpers"]),
         .library(
             name: "HelpersSwiftUI",
             targets: ["HelpersSwiftUI"]),
@@ -45,6 +55,12 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
+            name: "Helpers",
+            dependencies: []),
+        .target(
+            name: "HelpersDate",
+            dependencies: []),
+        .target(
             name: "HelpersCombine",
             dependencies: []),
         .target(
@@ -58,9 +74,6 @@ let package = Package(
             dependencies: [
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
-        .target(
-            name: "Helpers",
-            dependencies: []),
         .target(
             name: "HelpersSwiftUI",
             dependencies: [

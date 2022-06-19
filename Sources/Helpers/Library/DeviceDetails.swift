@@ -5,15 +5,11 @@
 //  Created by Nikolay Fiantsev on 30.07.2021.
 //
 
-import UIKit
+import Foundation
 
 public protocol DeviceDetails {}
 
 public extension DeviceDetails {
-  
-  var device: String {
-    return deviceModel + " " + systemVersion
-  }
   
   var deviceModel: String {
     var sysinfo = utsname()
@@ -21,12 +17,22 @@ public extension DeviceDetails {
     return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
   }
   
-  var systemVersion: String {
-    return UIDevice.current.systemVersion
-  }
-  
   var deviceLocale: String {
     return Locale.preferredLanguages.first ?? .naString
   }
 }
 
+
+#if canImport(UIDevice)
+import UIKit
+
+extension DeviceDetails {
+  var device: String {
+    return deviceModel + systemVersion
+  }
+  
+  var systemVersion: String {
+    return UIDevice.current.systemVersion
+  }
+}
+#endif
