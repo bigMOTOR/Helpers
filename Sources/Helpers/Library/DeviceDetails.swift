@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public protocol DeviceDetails {}
 
@@ -20,13 +21,7 @@ public extension DeviceDetails {
   var deviceLocale: String {
     return Locale.preferredLanguages.first ?? .naString
   }
-}
-
-
-#if canImport(UIDevice)
-import UIKit
-
-extension DeviceDetails {
+  
   var device: String {
     return deviceModel + systemVersion
   }
@@ -35,4 +30,3 @@ extension DeviceDetails {
     return UIDevice.current.systemVersion
   }
 }
-#endif
