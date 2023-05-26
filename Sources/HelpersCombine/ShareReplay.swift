@@ -23,7 +23,7 @@ public final class ReplaySubject<Output, Failure: Error>: Subject {
   private var completion: Subscribers.Completion<Failure>?
   private let lock = NSRecursiveLock()
 
-  public init(_ bufferSize: Int = 0) {
+  init(_ bufferSize: Int = 0) {
     self.bufferSize = bufferSize
   }
 
@@ -48,8 +48,7 @@ public final class ReplaySubject<Output, Failure: Error>: Subject {
     self.subscriptions.forEach { $0.receive(completion: completion) }
   }
 
-  public func receive<Downstream: Subscriber>(subscriber: Downstream)
-  where Downstream.Failure == Failure, Downstream.Input == Output {
+  public func receive<Downstream: Subscriber>(subscriber: Downstream) where Downstream.Failure == Failure, Downstream.Input == Output {
     self.lock.lock()
     defer { self.lock.unlock() }
     let subscription = Subscription(downstream: AnySubscriber(subscriber))

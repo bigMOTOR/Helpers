@@ -7,7 +7,14 @@
 
 import SwiftUI
 
-struct RoundedCorner: Shape {
+#if !os(macOS)
+public extension View {
+  func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+    clipShape(RoundedCorner(radius: radius, corners: corners))
+  }
+}
+
+private struct RoundedCorner: Shape {
   let radius: CGFloat
   let corners: UIRectCorner
   
@@ -21,3 +28,4 @@ struct RoundedCorner: Shape {
     return Path(path.cgPath)
   }
 }
+#endif

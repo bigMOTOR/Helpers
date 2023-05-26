@@ -7,7 +7,14 @@
 
 import SwiftUI
 
-struct RotationHandlerModifier: ViewModifier {
+#if os(iOS)
+public extension View {
+  func rotateHandling(anchor: UnitPoint = .center) -> some View {
+    return self.modifier(RotationHandlerModifier(anchor: anchor))
+  }
+}
+
+private struct RotationHandlerModifier: ViewModifier {
   private let _anchor: UnitPoint
   @State private var _rotation = 0.0
 
@@ -38,3 +45,4 @@ struct RotationHandlerModifier: ViewModifier {
       .speed(0.7)
   }
 }
+#endif

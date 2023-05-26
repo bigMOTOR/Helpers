@@ -7,7 +7,14 @@
 
 import SwiftUI
 
-struct OnRotateActionViewModifier: ViewModifier {
+#if os(iOS)
+public extension View {
+  func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
+    return self.modifier(OnRotateActionViewModifier(action: action))
+  }
+}
+
+private struct OnRotateActionViewModifier: ViewModifier {
   let action: (UIDeviceOrientation) -> Void
   
   func body(content: Content) -> some View {
@@ -18,3 +25,4 @@ struct OnRotateActionViewModifier: ViewModifier {
       }
   }
 }
+#endif

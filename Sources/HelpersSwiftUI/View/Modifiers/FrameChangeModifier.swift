@@ -7,7 +7,13 @@
 
 import SwiftUI
 
-struct FrameChangeModifier: ViewModifier {
+public extension View {
+  func onFrameChange(enabled isEnabled: Bool = true, frameHandler: @escaping (CGRect)->()) -> some View {
+    self.modifier(FrameChangeModifier(isEnabled: isEnabled, frameHandler: frameHandler))
+  }
+}
+
+private struct FrameChangeModifier: ViewModifier {
   let isEnabled: Bool
   let frameHandler: (CGRect)->()
   

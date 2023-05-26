@@ -5,6 +5,7 @@
 //  Created by Nikolay Fiantsev on 02.08.2021.
 //
 
+#if os(iOS)
 import SwiftUI
 import MessageUI
 import Helpers
@@ -76,6 +77,5 @@ extension MailView {
       
     }
   }
-  
 }
-
+#endif

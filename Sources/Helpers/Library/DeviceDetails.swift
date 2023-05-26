@@ -5,6 +5,7 @@
 //  Created by Nikolay Fiantsev on 30.07.2021.
 //
 
+#if os(iOS)
 import Foundation
 import UIKit
 
@@ -30,3 +31,4 @@ public extension DeviceDetails {
     return UIDevice.current.systemVersion
   }
 }
+#endif

@@ -34,6 +34,12 @@ struct RotatedView<Rotated: View>: View {
   }
 }
 
+public extension View {
+  func rotated(_ angle: Angle) -> some View {
+    RotatedView(self, angle: angle)
+  }
+}
+
 private struct SizeKey: PreferenceKey {
   static let defaultValue: CGSize = .zero
   static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
@@ -42,7 +48,6 @@ private struct SizeKey: PreferenceKey {
 }
 
 private extension View {
-  
   func _captureSize(in binding: Binding<CGSize>) -> some View {
     overlay(GeometryReader { geoReader in
       Color.clear.preference(key: SizeKey.self, value: geoReader.size)

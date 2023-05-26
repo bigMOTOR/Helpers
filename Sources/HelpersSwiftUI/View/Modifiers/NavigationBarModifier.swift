@@ -7,7 +7,15 @@
 
 import SwiftUI
 
-struct NavigationBarModifier: ViewModifier {
+#if os(iOS)
+public extension View {
+  @available(iOS, introduced: 14)
+  func navigationBarColors(background: Color, tint: Color) -> some View {
+    self.modifier(NavigationBarModifier(backgroundColor: UIColor(background), tintColor: UIColor(tint)))
+  }
+}
+
+private struct NavigationBarModifier: ViewModifier {
   let backgroundColor: UIColor
   let tintColor: UIColor
   
@@ -38,3 +46,4 @@ struct NavigationBarModifier: ViewModifier {
     }
   }
 }
+#endif
