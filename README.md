@@ -19,6 +19,24 @@ func distance(to index: Index) -> Int
 </details>
 
 <details>
+<summary>Decimal;</summary>
+    
+```swift
+var doubleValue: Double
+```
+ 
+</details>
+
+<details>
+<summary>Double;</summary>
+    
+```swift
+func roundToDecimals(_ decimals: Int, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) -> Double
+```
+ 
+</details>
+
+<details>
 <summary>Date;</summary>
     
 - work with unixMilliseconds;
@@ -39,6 +57,7 @@ func distance(to index: Index) -> Int
 <details>
 <summary>Something I need sometimes;</summary>
 
+- struct DateRange;
 - protocol AppDetails - provides app version and build number;
 - protocol AppStoreReview - provides dialog for Rate Us;
 - protocol DeviceDetails - provides device model, system version and  device locale;
@@ -46,10 +65,11 @@ func distance(to index: Index) -> Int
 - Formatter - easy way to format numbers;
 - JsonObject - pretty typealias for [String: Any].
 
+
 </details>
 
 ## Combine (HelpersCombine)
-- PublisherExtension:
+- Publisher:
 ```swift
 func mapToVoid()
 func mapToOptional()
@@ -59,6 +79,12 @@ func filterTrue()
 func invert() 
 func mapArray<T>(transform)
 func shareReplay(bufferSize)    // Adapted from https://www.onswiftwings.com/posts/share-replay-operator/ 
+```
+
+- Future:
+```swift
+convenience init(asyncFunc: @escaping () async throws -> Output)
+convenience init(asyncFunc: @escaping () async -> Output)
 ```
 
 ## In-App (HelpersIAP):
@@ -76,16 +102,26 @@ func fromAsync(_ block: { element in ... }) -> Single<Element>
 ```
 
 ## SwiftUI (HelpersSwiftUI):
+ViewExtension:
+```swift
+/// Applies the given transform if the given condition evaluates to `true`
+@ViewBuilder func `if`<Content: View>(_ condition: @autoclosure () -> Bool, transform: (Self) -> Content) -> some View
+```
+
 Modifiers:
 ```swift
+func blink(on state: Binding<Bool>, duration: Double = 0.1)
 func navigationBarColors(background: Color, tint: Color)
 func onFrameChange(enabled isEnabled: Bool = true, frameHandler: @escaping (CGRect)->())
-func shimmer(isActive: Bool = true, speed: Double = 0.15, angle: Angle = .init(degrees: 70), opacity: Double = 1.0)
 func cornerRadius(_ radius: CGFloat, corners: UIRectCorner)
 func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void)
 func rotateHandling(anchor: UnitPoint = .center)
 func rotated(_ angle: Angle)
-func blink(on state: Binding<Bool>, duration: Double = 0.1)
+```
+
+Shapes:
+```swift
+func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) 
 ```
 
 <details>
@@ -95,14 +131,6 @@ func blink(on state: Binding<Bool>, duration: Double = 0.1)
     
 </details>
 
-## [The Composable Architecture (TCA)](https://github.com/pointfreeco/swift-composable-architecture) Helpers (HelpersTCA):
-- Lifecycle Reducer ([problem statement](https://forums.swift.org/t/ifletstore-and-effect-cancellation-on-view-disappear/38272/7));
-- Equatable VoidResult type;
-- Equatable WrappedError type.
-
-Many thanks to [Misha Markin](mailto:shire8bit@gmail.com) at this part. 
-
-## Rx and TCA Wrappers for [RevenueCat Subscription Platform](https://www.revenuecat.com) (RevenuecatRx or RevenuecatComposable)
 
 ## Installation
 Helpers available via: 
