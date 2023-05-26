@@ -33,7 +33,7 @@ private struct NavigationBarModifier: ViewModifier {
   }
   
   func body(content: Content) -> some View {
-    ZStack{
+    ZStack {
       content
       VStack {
         GeometryReader { geometry in

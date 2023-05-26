@@ -26,8 +26,8 @@ private struct BlinkingModifier: ViewModifier {
         }
         return self.state.wrappedValue
       },
-      set: {
-        self.state.wrappedValue = $0
+      set: { newValue in
+        self.state.wrappedValue = newValue
       }
     )
   }

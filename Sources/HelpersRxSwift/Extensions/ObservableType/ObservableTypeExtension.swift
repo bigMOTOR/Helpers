@@ -17,4 +17,3 @@ public extension ObservableType {
     return self.map { $0 as Element? }
   }
 }
-

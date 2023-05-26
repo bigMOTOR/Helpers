@@ -112,7 +112,7 @@ Modifiers:
 ```swift
 func blink(on state: Binding<Bool>, duration: Double = 0.1)
 func navigationBarColors(background: Color, tint: Color)
-func onFrameChange(enabled isEnabled: Bool = true, frameHandler: @escaping (CGRect)->())
+func onFrameChange(enabled isEnabled: Bool = true, frameHandler: @escaping (CGRect)->Void)
 func cornerRadius(_ radius: CGFloat, corners: UIRectCorner)
 func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void)
 func rotateHandling(anchor: UnitPoint = .center)

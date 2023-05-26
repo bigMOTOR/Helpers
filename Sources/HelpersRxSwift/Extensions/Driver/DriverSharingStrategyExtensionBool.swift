@@ -1,3 +1,4 @@
+// swiftlint:disable:this file_name
 //
 //  DriverSharingStrategyExtensionBool.swift
 //  
@@ -10,7 +11,6 @@ import RxSwift
 import RxCocoa
 
 public extension SharedSequence where SharingStrategy == DriverSharingStrategy, Element == Bool {
-  
   func filterFalse() -> SharedSequence<DriverSharingStrategy, Void> {
     return self.filter { $0 == true }.mapToVoid()
   }

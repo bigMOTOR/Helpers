@@ -20,7 +20,6 @@ public extension Date {
 }
 
 public extension Date {
-  
   // MARK: - Date components
   var yearUTC: Int {
     return year(on: .gregorianUTC)
@@ -170,9 +169,8 @@ extension Date: Strideable {
 }
 
 // MARK: - Internal Core Stuff
-
+// swiftlint:disable force_unwrapping
 internal extension Date {
-  
   // MARK: - Date components
   func year(on calendar: Calendar) -> Int {
     return calendar.component(.year, from: self)
@@ -245,6 +243,7 @@ internal extension Date {
   func daysFrom(_ date: Date, on calendar: Calendar) -> Int {
     return calendar.dateComponents([.day], from: date, to: self).day!
   }
+  // swiftlint:enable force_unwrapping
   
   // MARK: - Comparison methods
   func isCalendarMonthEqual(to date: Date, on calendar: Calendar) -> Bool {

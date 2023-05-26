@@ -21,11 +21,13 @@ public struct Formatter {
   }
     
   public func get<N: NSNumberConvertable>(_ number: N) -> String {
+    // swiftlint:disable force_unwrapping
     return _transform(NumberFormatter()).string(from: number.asNSNumber)!
+    // swiftlint:enable force_unwrapping
   }
   
   public func map(_ transform: @escaping FormatterTransform) -> Formatter {
-    return Formatter { transform(self._transform($0))}
+    return Formatter { transform(self._transform($0)) }
   }
   
   // MARK: Formatting
@@ -75,7 +77,6 @@ public extension Formatter {
       return formatter
     }
   }
-
 }
 
 public protocol NSNumberConvertable {

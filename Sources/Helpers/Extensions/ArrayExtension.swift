@@ -29,4 +29,3 @@ public extension Collection {
     distance(from: startIndex, to: index)
   }
 }
-

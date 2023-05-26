@@ -8,7 +8,6 @@
 import Foundation
 
 public struct IAPProduct: Equatable {
-  
   public struct Period: Equatable {
     public enum Unit: String {
       case day
@@ -30,7 +29,6 @@ public struct IAPProduct: Equatable {
         self.unit = unit
       }
     }
-    
   }
   
   public let productIdentifier: String
@@ -45,13 +43,15 @@ public struct IAPProduct: Equatable {
 #if DEBUG
 public extension IAPProduct {
   static func mock(unit: IAPProduct.Period.Unit) -> IAPProduct {
-    return IAPProduct(productIdentifier: "productIdentifier",
-                      localizedDescription: "localizedDescription",
-                      localizedPriceString: "$29.99",
-                      price: 29.99,
-                      currencyCode: "USD",
-                      subscriptionPeriod: Period(numberOfUnits: 1, unit: unit),
-                      introductoryPeriod: Period(numberOfUnits: 3, unit: .day))
+    return IAPProduct(
+      productIdentifier: "productIdentifier",
+      localizedDescription: "localizedDescription",
+      localizedPriceString: "$29.99",
+      price: 29.99,
+      currencyCode: "USD",
+      subscriptionPeriod: Period(numberOfUnits: 1, unit: unit),
+      introductoryPeriod: Period(numberOfUnits: 3, unit: .day)
+    )
   }
 }
 #endif

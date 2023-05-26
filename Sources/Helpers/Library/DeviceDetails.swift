@@ -12,11 +12,12 @@ import UIKit
 public protocol DeviceDetails {}
 
 public extension DeviceDetails {
-  
   var deviceModel: String {
     var sysinfo = utsname()
     uname(&sysinfo)
+    // swiftlint:disable force_unwrapping
     return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
+    // swiftlint:enable force_unwrapping
   }
   
   var deviceLocale: String {

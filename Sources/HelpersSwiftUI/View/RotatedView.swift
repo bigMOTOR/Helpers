@@ -21,7 +21,7 @@ struct RotatedView<Rotated: View>: View {
   var body: some View {
     // Rotate the frame, and compute the smallest integral frame that contains it
     let newFrame = CGRect(origin: .zero, size: size)
-      .offsetBy(dx: -size.width/2, dy: -size.height/2)
+      .offsetBy(dx: -size.width / 2, dy: -size.height / 2)
       .applying(.init(rotationAngle: CGFloat(angle.radians)))
       .integral
     
@@ -29,8 +29,10 @@ struct RotatedView<Rotated: View>: View {
       .fixedSize()                    // Don't change the view's ideal frame
       ._captureSize(in: $size)        // Capture the size of the view's ideal frame
       .rotationEffect(angle)          // Rotate the view
-      .frame(width: newFrame.width,   // And apply the new frame
-             height: newFrame.height)
+      .frame(                         // And apply the new frame
+        width: newFrame.width,
+        height: newFrame.height
+      )
   }
 }
 

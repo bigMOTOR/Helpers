@@ -8,14 +8,14 @@
 import SwiftUI
 
 public extension View {
-  func onFrameChange(enabled isEnabled: Bool = true, frameHandler: @escaping (CGRect)->()) -> some View {
+  func onFrameChange(enabled isEnabled: Bool = true, frameHandler: @escaping (CGRect)->Void) -> some View {
     self.modifier(FrameChangeModifier(isEnabled: isEnabled, frameHandler: frameHandler))
   }
 }
 
 private struct FrameChangeModifier: ViewModifier {
   let isEnabled: Bool
-  let frameHandler: (CGRect)->()
+  let frameHandler: (CGRect)->Void
   
   func body(content: Content) -> some View {
     guard isEnabled else { return AnyView(content) }
@@ -29,7 +29,7 @@ private struct FrameChangeModifier: ViewModifier {
 }
 
 private extension View {
-  func beforeReturn(_ onBeforeReturn: ()->()) -> Self {
+  func beforeReturn(_ onBeforeReturn: ()->Void) -> Self {
     onBeforeReturn()
     return self
   }

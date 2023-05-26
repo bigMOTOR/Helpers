@@ -11,8 +11,8 @@ import MessageUI
 import Helpers
 
 public struct MailView: UIViewControllerRepresentable, AppDetails, DeviceDetails {
-  
-  @Environment(\.presentationMode) var presentation
+  @Environment(\.presentationMode)
+  var presentation
   @Binding var result: Result<MFMailComposeResult, Error>?
   private let _recipient: String
   private let _subject: String
@@ -41,7 +41,6 @@ public struct MailView: UIViewControllerRepresentable, AppDetails, DeviceDetails
   
   public func updateUIViewController(_ uiViewController: MFMailComposeViewController, context: UIViewControllerRepresentableContext<MailView>) {
   }
-  
 }
 
 extension UIViewController: MFMailComposeViewControllerDelegate {
@@ -51,9 +50,7 @@ extension UIViewController: MFMailComposeViewControllerDelegate {
 }
 
 extension MailView {
-  
-  final public class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
-    
+  public final class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
     @Binding private var _presentation: PresentationMode
     @Binding private var _result: Result<MFMailComposeResult, Error>?
     
@@ -63,7 +60,6 @@ extension MailView {
     }
     
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-      
       defer {
         $_presentation.wrappedValue.dismiss()
       }
@@ -74,7 +70,6 @@ extension MailView {
       case .some(let err):
         self._result = .failure(err)
       }
-      
     }
   }
 }

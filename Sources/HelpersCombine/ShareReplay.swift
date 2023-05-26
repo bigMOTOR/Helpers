@@ -1,3 +1,4 @@
+// swiftlint:disable:this file_name
 //
 //  ShareReplay.swift
 //  
@@ -93,4 +94,3 @@ public final class ReplaySubject<Output, Failure: Error>: Subject {
     }
   }
 }
-

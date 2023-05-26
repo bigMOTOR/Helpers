@@ -1,3 +1,4 @@
+// swiftlint:disable:this file_name
 //
 //  PublisherExtensionBool.swift
 //  
@@ -25,4 +26,3 @@ public extension Publisher where Output == Bool {
     return self.map(!)
   }
 }
-

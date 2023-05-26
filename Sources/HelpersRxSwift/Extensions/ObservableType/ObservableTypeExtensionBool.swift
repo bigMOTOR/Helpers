@@ -1,3 +1,4 @@
+// swiftlint:disable:this file_name
 //
 //  ObservableTypeExtensionBool.swift
 //  
@@ -10,7 +11,6 @@ import RxSwift
 import RxCocoa
 
 public extension ObservableType where Element == Bool {
-  
   func filterFalse() -> Observable<Void> {
     return self.filter { $0 == true }.mapToVoid()
   }
@@ -27,8 +27,8 @@ public extension ObservableType where Element == Bool {
     return Observable
       .of(
         self.filter { $0 }
-          .flatMapLatest {
-            Observable.just($0)
+          .flatMapLatest { bool in
+            Observable.just(bool)
               .delaySubscription(delay, scheduler: MainScheduler.instance)
               .take(until: self.filter { !$0 })
           },
@@ -42,5 +42,4 @@ public extension ObservableType where Element == Bool {
       .asDelayedActivity(delay)
       .asDriver(onErrorJustReturn: false)
   }
-  
 }

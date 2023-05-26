@@ -15,7 +15,7 @@ public protocol AppStoreReview {
 
 public extension AppStoreReview {
   func incrementCount() {
-    UserDefaults.standard.storedCount = UserDefaults.standard.storedCount + 1
+    UserDefaults.standard.storedCount += 1
   }
   
   /// This will not be shown everytime. Apple has some internal logic on how to show this.
@@ -24,7 +24,7 @@ public extension AppStoreReview {
     case true:
       SKStoreReviewController.requestReview()
     case false:
-      break;
+      break
     }
   }
 }
