@@ -117,6 +117,7 @@ func cornerRadius(_ radius: CGFloat, corners: UIRectCorner)
 func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void)
 func rotateHandling(anchor: UnitPoint = .center)
 func rotated(_ angle: Angle)
+func shimmer(isActive: Bool = true, speed: Double = 0.15, angle: Angle = .init(degrees: 70), opacity: Double = 1.0)
 ```
 
 Shapes:
