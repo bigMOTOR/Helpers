@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct IAPProduct: Equatable {
-  public struct Period: Equatable {
-    public enum Unit: String {
+public struct IAPProduct: Equatable, Sendable {
+  public struct Period: Equatable, Sendable {
+    public enum Unit: String, Sendable {
       case day
       case week
       case month
