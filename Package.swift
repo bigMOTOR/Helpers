@@ -31,7 +31,7 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .create(scope: .base),
+        .create(scope: .base, resources: [.copy("PrivacyInfo.xcprivacy")]),
         .create(scope: .date, dependencies: [.init(.base)]),
         .create(scope: .combine),
         .create(scope: .rxSwift, dependencies: ["RxSwift", .product(name: "RxCocoa", package: "RxSwift")]),
@@ -56,10 +56,11 @@ private extension PackageDescription.Product {
 }
 
 private extension Target {
-  static func create(scope: HelperScope, dependencies: [Target.Dependency] = []) -> Target {
+  static func create(scope: HelperScope, dependencies: [Target.Dependency] = [], resources: [Resource]? = nil) -> Target {
     return .target(
       name: scope.rawValue,
       dependencies: dependencies,
+      resources: resources,
       plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
     )
   }
