@@ -24,9 +24,9 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.0.0" )),
-        .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "4.17.0" )),
-        .package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.52.0"))
+        .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.6.0" )),
+        .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "4.20.0" )),
+        .package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.54.0"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
