@@ -9,12 +9,17 @@ import Foundation
 import RxSwift
 
 public extension Single {
-  static func fromAsync(_ block: @escaping (@escaping (Element)->Void)->Void) -> Single<Element> {
+  static func fromAsync(_ asyncFunc: (@escaping @Sendable () async throws -> Element)) -> Single<Element> {
     Single.create { observer in
-      block { result in
-        observer(.success(result))
+      let task = Task {
+        do {
+          let value = try await asyncFunc()
+          observer(.success(value))
+        } catch {
+          observer(.failure(error))
+        }
       }
-      return Disposables.create()
+      return Disposables.create { task.cancel() }
     }
   }
 }

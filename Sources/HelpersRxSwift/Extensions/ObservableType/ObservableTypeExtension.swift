@@ -9,6 +9,21 @@ import Foundation
 import RxSwift
 
 public extension ObservableType {
+  static func fromAsync(_ asyncFunc: (@escaping @Sendable () async throws -> Element)) -> Observable<Element> {
+    Observable.create { observer in
+      let task = Task {
+        do {
+          let value = try await asyncFunc()
+          observer.onNext(value)
+          observer.onCompleted()
+        } catch {
+          observer.onError(error)
+        }
+      }
+      return Disposables.create { task.cancel() }
+    }
+  }
+  
   func mapToVoid() -> Observable<Void> {
     return self.map { _ in }
   }
