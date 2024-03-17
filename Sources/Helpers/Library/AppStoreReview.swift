@@ -18,7 +18,7 @@ public extension AppStoreReview {
     UserDefaults.standard.storedCount += 1
   }
   
-  /// This will not be shown everytime. Apple has some internal logic on how to show this.
+  /// This will not be shown every time. Apple has some internal logic on how to show this.
   func tryToAsk() {
     switch shouldAsk(for: UserDefaults.standard.storedCount) {
     case true:
