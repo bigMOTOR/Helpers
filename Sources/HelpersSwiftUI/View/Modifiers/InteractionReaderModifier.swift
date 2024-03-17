@@ -1,3 +1,4 @@
+// swiftlint:disable:this file_name
 //
 //  InteractionReaderModifier.swift
 //
@@ -21,44 +22,43 @@ private struct InteractionReaderViewModifier: ViewModifier {
   var longPressSensitivity: Int
   var tapAction: () -> Void
   var longPressAction: () -> Void
-  var scaleEffect: Bool = true
+  var scaleEffect = true
   
-  @State private var isPressing: Bool = Bool()
-  @State private var currentDismissId: DispatchTime = DispatchTime.now()
-  @State private var lastInteractionKind: String = String()
+  @State private var isPressing = Bool()
+  @State private var currentDismissId = DispatchTime.now()
+  @State private var lastInteractionKind = String()
   
   func body(content: Content) -> some View {
     let processedContent = content
       .gesture(gesture)
-      .onChange(of: isPressing) { newValue in
+      .onChange(of: isPressing) { _ in
         currentDismissId = DispatchTime.now() + .milliseconds(longPressSensitivity)
         let dismissId: DispatchTime = currentDismissId
         
         if isPressing {
           DispatchQueue.main.asyncAfter(deadline: dismissId) {
             if isPressing {
-              if (dismissId == currentDismissId) {
-                lastInteractionKind = "longPress"
+              if dismissId == currentDismissId {
+                lastInteractionKind = longPressTag
                 longPressAction()
               }
             }
           }
-        }
-        else {
-          if (lastInteractionKind != "longPress") {
-            lastInteractionKind = "tap"
+        } else {
+          if lastInteractionKind != longPressTag {
+            lastInteractionKind = tapTag
             tapAction()
           }
           
           DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) {
-            lastInteractionKind = "none"
+            lastInteractionKind = noneTag
           }
         }
       }
     
     return Group {
       if scaleEffect {
-        processedContent.scaleEffect(lastInteractionKind == "longPress" ? 1.5: (lastInteractionKind == "tap" ? 0.8 : 1.0))
+        processedContent.scaleEffect(lastInteractionKind == longPressTag ? 1.5 : (lastInteractionKind == tapTag ? 0.8 : 1.0))
       } else {
         processedContent
       }
@@ -67,8 +67,11 @@ private struct InteractionReaderViewModifier: ViewModifier {
   
   var gesture: some Gesture {
     DragGesture(minimumDistance: 0.0, coordinateSpace: .local)
-      .onChanged() { _ in if !isPressing { isPressing = true } }
-      .onEnded() { _ in isPressing = false }
+      .onChanged { _ in if !isPressing { isPressing = true } }
+      .onEnded { _ in isPressing = false }
   }
 }
 
+private let longPressTag = "longPress"
+private let tapTag = "tap"
+private let noneTag = "none"
