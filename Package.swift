@@ -25,7 +25,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.6.0" )),
-        .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "4.20.0" )),
+        .package(url: "https://github.com/RevenueCat/purchases-ios-spm.git", .upToNextMajor(from: "4.40.0" )),
         .package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.54.0"))
     ],
     targets: [
@@ -36,7 +36,7 @@ let package = Package(
         .create(scope: .combine),
         .create(scope: .rxSwift, dependencies: ["RxSwift", .product(name: "RxCocoa", package: "RxSwift")]),
         .create(scope: .swiftUI, dependencies: [.init(.base)]),
-        .create(scope: .iap, dependencies: [.product(name: "RevenueCat", package: "purchases-ios")])
+        .create(scope: .iap, dependencies: [.product(name: "RevenueCat", package: "purchases-ios-spm")])
     ]
 )
 
