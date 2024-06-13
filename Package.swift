@@ -25,8 +25,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.6.0" )),
-        .package(url: "https://github.com/RevenueCat/purchases-ios-spm.git", .upToNextMajor(from: "4.40.0" )),
-        .package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.54.0"))
+        .package(url: "https://github.com/RevenueCat/purchases-ios-spm.git", .upToNextMajor(from: "4.40.0" ))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -60,8 +59,7 @@ private extension Target {
     return .target(
       name: scope.rawValue,
       dependencies: dependencies,
-      resources: resources,
-      plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+      resources: resources
     )
   }
 }
