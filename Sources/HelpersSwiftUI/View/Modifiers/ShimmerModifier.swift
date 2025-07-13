@@ -21,11 +21,13 @@ private struct ShimmerModifier: ViewModifier {
   
   @ViewBuilder
   func body(content: Content) -> some View {
-    if !isActive { content }
-    
-    content
-      .opacity(opacity)
-      .overlay(ShimmerView(speed: speed, angle: angle).mask(content))
+    if isActive {
+      content
+        .opacity(opacity)
+        .overlay(ShimmerView(speed: speed, angle: angle).mask(content))
+    } else {
+      content
+    }
   }
 }
 
