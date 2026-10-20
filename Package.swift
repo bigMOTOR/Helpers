@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -26,7 +26,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.6.0" )),
         .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "4.20.0" )),
-        .package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.54.0"))
+        .package(url: "https://github.com/realm/SwiftLint", exact: "0.55.1")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -61,7 +61,8 @@ private extension Target {
       name: scope.rawValue,
       dependencies: dependencies,
       resources: resources,
-      plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+      packageAccess: false,
+      plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint")]
     )
   }
 }
